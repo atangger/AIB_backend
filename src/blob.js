@@ -1,4 +1,4 @@
-var request = require('request')
+
 var azure = require('azure-storage');
 var config = require("../config/config");
 
@@ -31,6 +31,4 @@ blobHandler.prototype.get = function (res) {
             res.json(json);
         }
     });
-
-
 };

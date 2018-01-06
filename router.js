@@ -5,9 +5,7 @@ var face = require('./src/face.js');
 var blob = require('./src/blob.js');
 
 var bodyParser = require('body-parser');
-
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
-
 
 app.get('/image',img.imageRoute);
 app.post('/face', urlencodedParser, face.faceRoute);
