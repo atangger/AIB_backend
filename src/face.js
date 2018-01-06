@@ -1,34 +1,38 @@
-var request = require('request')
-var config = require('./config/config.js');
-exports.faceRoute = function(req,res){
-	var iH = new faceHandler('here should be the key','here should be the url');
-	iH.get();
+var request = require('request');
+var config = require('../config/config');
+
+exports.faceRoute = function (req, res) {
+	var fH = new faceHandler(req.body.img);
+	fH.get(res);
 }
 
-function faceHandler(key,imgUrl){
-	this.key = key; // the authentication key
+function faceHandler(imgUrl) {
 	this.imgUrl = imgUrl; // the url of the src img
 }
 
-faceHandler.prototype.apiUrl = '';
+faceHandler.prototype.apiUrl = config.face.endPoint + '/detect' +
+	'?returnFaceId=true&returnFaceLandmarks=false&returnFaceAttributes=age,gender,headPose,smile,facialHair,glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure,noise';
 
-faceHandler.prototype.get = function() {
+faceHandler.prototype.get = function (res) {
 	var header = {
-		 "Content-type": "application/json",
-		 "Ocp-Apim-Subscription-Key" : this.key
+		"Content-type": "application/json",
+		"Ocp-Apim-Subscription-Key": config.face.key1
 	};
 
 	var options = {
-        url: this.apiUrl,
-        method: "POST",
-        headers: header,
-      	body: JSON.stringify('{"url": ' + '"' + this.imgUrl + '"}')
-      	};
+		url: this.apiUrl,
+		method: "POST",
+		headers: header,
+		body: '{"url": ' + '"' + this.imgUrl + '"}'
+	};
 
-    request(options,function(error,response,body){
-    	if(!error && response.statusCode ==200){
-    		res.json(JSON.parse(body));
-            // 
-    	}
-    })
+	request(options, function (error, response, body) {
+		if (!error && response.statusCode == 200) {
+			var data = JSON.parse(body);
+			var json = JSON.parse('{}');
+			json.code = 0;
+			json.data = data
+			res.json(json);
+		}
+	});
 };
