@@ -12,6 +12,7 @@ function imageHandler(imgUrl){
 }
 imageHandler.prototype.get = function(res) {
     console.log("in the get!!!");
+    
     var params = {
             "visualFeatures": "Categories,Description,Color",
             "details": "",
