@@ -1,8 +1,8 @@
 var express = require('express');
 var app = express();
 var img = require('./src/image.js');
-var face = require('./src/face.js');
-var blob = require('./src/blob.js');
+//var face = require('./src/face.js');
+//var blob = require('./src/blob.js');
 
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
