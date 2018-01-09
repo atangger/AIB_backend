@@ -1,8 +1,10 @@
 var request = require('request');
 var config = require('../config/config');
+var url = require('url');
 
 exports.faceRoute = function (req, res) {
-	var fH = new faceHandler(req.body.img);
+	var params = url.parse(req.url, true).query;
+	var fH = new faceHandler(params.img);
 	fH.get(res);
 }
 
@@ -32,7 +34,7 @@ faceHandler.prototype.get = function (res) {
 			var json = JSON.parse('{}');
 			json.code = 0;
 			json.data = data
-			res.json(json);
+			res.jsonp(json);
 		}
 	});
 };
