@@ -1,5 +1,6 @@
 var azure = require('azure-storage');
 var config = require("../config/config");
+var url = require('url');
 
 var containerName = 'tempcontainer';
 
@@ -27,7 +28,7 @@ blobHandler.prototype.get = function (res) {
             var json = JSON.parse('{}');
             json.code = 0;
             json.data = data;
-            res.json(json);
+            res.jsonp(json);
         }
     });
 };
