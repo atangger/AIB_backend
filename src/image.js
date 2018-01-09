@@ -1,31 +1,40 @@
 var request = require('request')
 
 exports.imageRoute = function(req,res){
-	var iH = new imageHandler('here should be the key','here should be the url');
-	iH.get();
+	var iH = new imageHandler('http://upload.wikimedia.org/wikipedia/commons/3/3c/Shaki_waterfall.jpg');
+	iH.get(res);
 }
 
-function imageHandler(key,imgUrl){
-	this.key = key; // the authentication key
-	this.imgUrl = imgUrl; // the url of the src img
+function imageHandler(imgUrl){
+    this.imgUrl = imgUrl;
+	this.key = '3b8861a4b8024584a73d1d28cc496279'; // the authentication key // the url of the src img
+    this.apiUrl = 'https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/analyze';
 }
-
-imageHandler.prototype.apiUrl = '';
-
-imageHandler.prototype.get = function() {
+imageHandler.prototype.get = function(res) {
+    console.log("in the get!!!");
+    
+    var params = {
+            "visualFeatures": "Categories,Description,Color",
+            "details": "",
+            "language": "en"
+        };
 	var header = {
 		 "Content-type": "application/json",
 		 "Ocp-Apim-Subscription-Key" : this.key
 	};
 
+    var resource = {"url": this.imgUrl};
 	var options = {
         url: this.apiUrl,
         method: "POST",
+        qs: params,
         headers: header,
-      	body: JSON.stringify('{"url": ' + '"' + this.imgUrl + '"}')
+      	body: JSON.stringify(resource)
       	};
 
     request(options,function(error,response,body){
+        console.log("get response!!! statusCode = " + response.statusCode);
+        console.log("the message = " + JSON.stringify(response));
     	if(!error && response.statusCode ==200){
     		res.json(JSON.parse(body));
             // 
