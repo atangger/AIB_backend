@@ -4,15 +4,15 @@ var url = require('url');
 
 var containerName = 'tempcontainer';
 
-exports.blobRoute = function (req, res) {
+exports.blobRoute = function (req, res,next) {
     var bH = new blobHandler();
-    bH.get(res);
+    bH.get(res,next);
 }
 
 function blobHandler() {
 }
 
-blobHandler.prototype.get = function (res) {
+blobHandler.prototype.get = function (res,next) {
 
     var blobSvc = azure.createBlobService(config.blob.key1.connString);
     var contianerOptional = azure.BlobService.CreateContainerOptions

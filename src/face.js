@@ -2,7 +2,7 @@ var request = require('request');
 var config = require('../config/config');
 var url = require('url');
 
-exports.faceRoute = function (req, res) {
+exports.faceRoute = function (req, res,next) {
 	var params = url.parse(req.url, true).query;
 	var fH = new faceHandler(params.img);
 	fH.get(res);
@@ -15,7 +15,7 @@ function faceHandler(imgUrl) {
 faceHandler.prototype.apiUrl = config.face.endPoint + '/detect' +
 	'?returnFaceId=true&returnFaceLandmarks=false&returnFaceAttributes=age,gender,headPose,smile,facialHair,glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure,noise';
 
-faceHandler.prototype.get = function (res) {
+faceHandler.prototype.get = function (res,next) {
 	var header = {
 		"Content-type": "application/json",
 		"Ocp-Apim-Subscription-Key": config.face.key1

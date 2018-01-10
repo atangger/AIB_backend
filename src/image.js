@@ -1,10 +1,10 @@
 var request = require('request');
 var url = require('url');
 
-exports.imageRoute = function(req,res){
+exports.imageRoute = function(req,res,next){
     var params = url.parse(req.url, true).query;
 	var iH = new imageHandler(params.img);
-	iH.get(res);
+	iH.get(res,next);
 }
 
 function imageHandler(imgUrl){
@@ -12,7 +12,7 @@ function imageHandler(imgUrl){
 	this.key = '3b8861a4b8024584a73d1d28cc496279'; // the authentication key 
     this.apiUrl = 'https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/analyze';
 }
-imageHandler.prototype.get = function(res) {
+imageHandler.prototype.get = function(res,next) {
     console.log("in the get!!!");
 
     var params = {
