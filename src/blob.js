@@ -21,6 +21,7 @@ blobHandler.prototype.get = function (res) {
     }
 
     blobSvc.createContainerIfNotExists(containerName, contianerOptional, function (error, request, response) {
+        if(error) return next(error);
         if (!error && response.statusCode == 200) {
             var blobSAS = blobSvc.generateSharedAccessSignature(containerName, '', { Id: 'all' });
             var data = JSON.parse('{}');

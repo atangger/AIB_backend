@@ -36,6 +36,7 @@ imageHandler.prototype.get = function(res) {
 
     request(options,function(error,response,body){
         console.log("get response!!! statusCode = " + response.statusCode);
+        if(error) return next(error);
     	if(!error && response.statusCode ==200){
             var data = JSON.parse(body);
             var json = JSON.parse('{}');

@@ -29,6 +29,7 @@ faceHandler.prototype.get = function (res) {
 	};
 
 	request(options, function (error, response, body) {
+        if(error) return next(error);
 		if (!error && response.statusCode == 200) {
 			var data = JSON.parse(body);
 			var json = JSON.parse('{}');
