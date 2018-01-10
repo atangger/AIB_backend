@@ -18,6 +18,11 @@ app.get('/face', face.faceRoute);
 app.get('/blob', blob.blobRoute);
 app.get('/ocr',ocr.ocrRoute);
 
+app.use(function(err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+
 var server = app.listen(3000, function () {
 	var host = '127.0.0.1';
 	var port = server.address().port;
