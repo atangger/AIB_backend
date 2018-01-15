@@ -17,7 +17,7 @@ imageHandler.prototype.get = function(res,next) {
 
     var params = {
             "visualFeatures": "Categories,Description,Color",
-            "details": "",
+            "details": "Adult",
             "language": "en"
         };
 	var header = {
