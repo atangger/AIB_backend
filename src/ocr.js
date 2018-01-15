@@ -18,7 +18,7 @@ ocrHandler.prototype.get = function(res,next) {
     var params = {
             "visualFeatures": "Categories,Description,Color",
             "details": "",
-            "language": "zh-Hans"
+            "language": "unk"
         };
 	var header = {
 		 "Content-type": "application/json",
