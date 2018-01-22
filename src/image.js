@@ -9,7 +9,7 @@ exports.imageRoute = function(req,res,next){
 
 function imageHandler(imgUrl){
     this.imgUrl = imgUrl;
-	this.key = '3b8861a4b8024584a73d1d28cc496279'; // the authentication key 
+	this.key = 'c09a9ff0e8dd4a2cbc3af12560fbb0cf'; // the authentication key 
     this.apiUrl = 'https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/analyze';
 }
 imageHandler.prototype.get = function(res,next) {
@@ -36,6 +36,7 @@ imageHandler.prototype.get = function(res,next) {
 
     request(options,function(error,response,body){
         console.log("get response!!! statusCode = " + response.statusCode);
+        console.log("get response!!! response = " + JSON.stringify(response));
         if(error) return next(error);
     	if(!error && response.statusCode ==200){
             var data = JSON.parse(body);
