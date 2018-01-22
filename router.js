@@ -24,7 +24,7 @@ app.use(function(err, req, res, next) {
 });
 
 var server = app.listen(3000, function () {
-	var host = '127.0.0.1';
+	var host = '52.179.83.176';
 	var port = server.address().port;
 	console.log('Example app listen at http://%s:%s', host, port);
 });
