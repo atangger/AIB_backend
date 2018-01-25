@@ -1,5 +1,6 @@
 var request = require('request');
 var url = require('url');
+var config = require('../config/config');
 
 exports.imageRoute = function(req,res,next){
     var params = url.parse(req.url, true).query;
@@ -9,8 +10,8 @@ exports.imageRoute = function(req,res,next){
 
 function imageHandler(imgUrl){
     this.imgUrl = imgUrl;
-	this.key = 'c09a9ff0e8dd4a2cbc3af12560fbb0cf'; // the authentication key 
-    this.apiUrl = 'https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/analyze';
+	this.key = config.cv.key1; // the authentication key 
+    this.apiUrl = config.cv.endPoint;
 }
 imageHandler.prototype.get = function(res,next) {
     console.log("in the get!!!");
@@ -20,6 +21,7 @@ imageHandler.prototype.get = function(res,next) {
             "details": "",
             "language": "en"
         };
+        
 	var header = {
 		 "Content-type": "application/json",
 		 "Ocp-Apim-Subscription-Key" : this.key

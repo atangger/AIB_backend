@@ -1,5 +1,6 @@
 var request = require('request');
 var url = require('url');
+var config = require('../config/config');
 
 exports.ocrRoute = function(req,res,next){
     var params = url.parse(req.url, true).query;
@@ -9,8 +10,8 @@ exports.ocrRoute = function(req,res,next){
 
 function ocrHandler(imgUrl){
     this.imgUrl = imgUrl;
-	this.key = 'c09a9ff0e8dd4a2cbc3af12560fbb0cf'; // the authentication key 
-    this.apiUrl = 'https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/ocr';
+	this.key = config.ocr.key1; // the authentication key 
+    this.apiUrl = config.ocr.endPoint;
 }
 ocrHandler.prototype.get = function(res,next) {
     console.log("in the get!!!");
