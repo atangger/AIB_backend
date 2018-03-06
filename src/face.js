@@ -18,7 +18,7 @@ faceHandler.prototype.apiUrl = config.face.endPoint + '/detect' +
 faceHandler.prototype.get = function (res,next) {
 	var header = {
 		"Content-type": "application/json",
-		"Ocp-Apim-Subscription-Key": config.face.key1
+		"Ocp-Apim-Subscription-Key": config.face.key2
 	};
 
 	var options = {
@@ -29,8 +29,11 @@ faceHandler.prototype.get = function (res,next) {
 	};
 
 	request(options, function (error, response, body) {
+        console.log("get response!!! statusCode = " + response.statusCode);
+        console.log(response);
         if(error) return next(error);
 		if (!error && response.statusCode == 200) {
+			console.log(body);
 			var data = JSON.parse(body);
 			var json = JSON.parse('{}');
 			json.code = 0;

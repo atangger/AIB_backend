@@ -2,8 +2,8 @@ module.exports  = {
     face :
     {
       endPoint : "https://eastasia.api.cognitive.microsoft.com/face/v1.0",
-      key1 : "53f4d2fa2b2e464f95295ef3599eb35b",
-      key2 : "aeaf8e3108e043b586db53fcd426d1cb"
+      key1 : "c508a76311cb4eff916d51e6906a81f2",
+      key2 : "bebcb5c57c0445bca19a326ff21d55c8"
     },
     text :
     {
