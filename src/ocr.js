@@ -37,6 +37,7 @@ ocrHandler.prototype.get = function(res,next) {
 
     request(options,function(error,response,body){
         console.log("get response!!! statusCode = " + response.statusCode);
+        console.log(response);
         if(error) return next(error);
     	if(!error && response.statusCode ==200){
             var data = JSON.parse(body);
